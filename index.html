@@ -88,14 +88,15 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <img src="logo.svg" alt="Logo TPL" class="logo-img" />
+    <div class="header">
+        <img src="logo-marari.png" alt="Logo Marari" class="logo-img" />
         <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
         <button id="darkModeToggle">
             <span class="icon">🌙</span>
-            <span class="label">Modo escuro</span>
+            <span class="mode-text">Modo Escuro</span>
         </button>
-    </header>
+        <span class="beta-badge">BETA</span>
+    </div>
 
     <div class="main-container">
         <div class="calendar-checkboxes">
@@ -184,7 +185,7 @@
         function applyDarkMode(active) {
             document.body.classList.toggle("dark-mode", active);
             toggleButton.querySelector(".icon").textContent = active ? "☀️" : "🌙";
-            toggleButton.querySelector(".label").textContent = active ? "Modo claro" : "Modo escuro";
+            toggleButton.querySelector(".mode-text").textContent = active ? "Modo Claro" : "Modo Escuro";
         }
 
         toggleButton.addEventListener("click", () => {
