@@ -30,6 +30,8 @@ body {
 .header h1 {
     font-size: 1.5rem;
     margin-left: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .logo-img {
@@ -49,6 +51,17 @@ body {
 
 #darkModeToggle .icon {
     margin-right: 0.5rem;
+}
+
+/* Badge Beta */
+.beta-badge {
+    background-color: #ff9800;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.5rem;
 }
 
 /* Main layout */
@@ -122,23 +135,6 @@ body {
     background: white;
 }
 
-/* Cores para os nomes dos pontos */
-.ponto1 {
-    color: #2952A3; /* Azul */
-}
-.ponto2 {
-    color: #0D7813; /* Verde */
-}
-.ponto3 {
-    color: #E67C73; /* Laranja */
-}
-.ponto4 {
-    color: #B1365F; /* Vermelho */
-}
-.ponto5 {
-    color: #893B90; /* Roxo */
-}
-
 /* Dark mode adjustments */
 .dark-mode .header {
     background-color: #111;
@@ -161,23 +157,6 @@ body {
 
 .dark-mode .calendar-checkbox .checkmark::after {
     background: #1f1f1f;
-}
-
-/* Manter a cor dos pontos no dark mode */
-.dark-mode .ponto1 {
-    color: #2952A3; /* Azul */
-}
-.dark-mode .ponto2 {
-    color: #0D7813; /* Verde */
-}
-.dark-mode .ponto3 {
-    color: #E67C73; /* Laranja */
-}
-.dark-mode .ponto4 {
-    color: #B1365F; /* Vermelho */
-}
-.dark-mode .ponto5 {
-    color: #893B90; /* Roxo */
 }
 
 /* Calendar iframe */
