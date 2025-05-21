@@ -12,7 +12,9 @@
             position: relative;
             padding-left: 2.5rem;
             cursor: pointer;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem; /* Espaçamento maior entre checkmark e texto */
             user-select: none;
             font-size: 1rem;
             line-height: 1.5;
@@ -25,9 +27,8 @@
         }
 
         .calendar-checkbox .checkmark {
-            position: absolute;
-            left: 0;
-            top: 0;
+            position: relative;
+            flex-shrink: 0;
             height: 1.5rem;
             width: 1.5rem;
             background-color: #eee;
