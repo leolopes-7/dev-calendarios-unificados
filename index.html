@@ -6,98 +6,16 @@
     <title>TPL Marari - Consulta de Carrinhos e Display</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="style.css" />
-    <style>
-        /* Apenas CSS dos radio buttons para referência */
-        .calendar-checkbox {
-            position: relative;
-            padding-left: 2.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem; /* Espaçamento maior entre checkmark e texto */
-            user-select: none;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .calendar-checkbox input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .calendar-checkbox .checkmark {
-            position: relative;
-            flex-shrink: 0;
-            height: 1.5rem;
-            width: 1.5rem;
-            background-color: #eee;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            transition: all 0.3s ease;
-        }
-
-        .calendar-checkbox:hover .checkmark {
-            background-color: #ddd;
-        }
-
-        .calendar-checkbox input:checked ~ .checkmark {
-            background-color: #0077cc;
-            border-color: #0077cc;
-        }
-
-        .calendar-checkbox .checkmark::after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        .calendar-checkbox input:checked ~ .checkmark::after {
-            display: block;
-        }
-
-        .calendar-checkbox .checkmark::after {
-            top: 5px;
-            left: 5px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: white;
-        }
-
-        /* Cores personalizadas para cada Ponto - checkmark */
-        .calendar-checkbox[data-point="1"] input:checked ~ .checkmark {
-            background-color: #2952A3; /* Azul */
-            border-color: #2952A3;
-        }
-        .calendar-checkbox[data-point="2"] input:checked ~ .checkmark {
-            background-color: #0D7813; /* Verde */
-            border-color: #0D7813;
-        }
-        .calendar-checkbox[data-point="3"] input:checked ~ .checkmark {
-            background-color: #E67C73; /* Laranja */
-            border-color: #E67C73;
-        }
-        .calendar-checkbox[data-point="4"] input:checked ~ .checkmark {
-            background-color: #B1365F; /* Vermelho */
-            border-color: #B1365F;
-        }
-        .calendar-checkbox[data-point="5"] input:checked ~ .checkmark {
-            background-color: #893B90; /* Roxo */
-            border-color: #893B90;
-        }
-    </style>
 </head>
 <body>
-    <div class="header">
-        <img src="logo-marari.png" alt="Logo Marari" class="logo-img" />
+    <header class="header">
+        <img src="logo.svg" alt="Logo TPL" class="logo-img" />
         <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
         <button id="darkModeToggle">
             <span class="icon">🌙</span>
-            <span class="mode-text">Modo Escuro</span>
+            <span class="label">Modo escuro</span>
         </button>
-        <span class="beta-badge">BETA</span>
-    </div>
+    </header>
 
     <div class="main-container">
         <div class="calendar-checkboxes">
@@ -186,7 +104,7 @@
         function applyDarkMode(active) {
             document.body.classList.toggle("dark-mode", active);
             toggleButton.querySelector(".icon").textContent = active ? "☀️" : "🌙";
-            toggleButton.querySelector(".mode-text").textContent = active ? "Modo Claro" : "Modo Escuro";
+            toggleButton.querySelector(".label").textContent = active ? "Modo claro" : "Modo escuro";
         }
 
         toggleButton.addEventListener("click", () => {
