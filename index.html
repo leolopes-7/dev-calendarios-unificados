@@ -1,199 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" data-theme="light">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TPL Marari - Consulta de Carrinhos e Display</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="style.css" />
-    <style>
-        /* Apenas CSS dos radio buttons para referência */
-        .calendar-checkbox {
-            position: relative;
-            padding-left: 2.5rem;
-            cursor: pointer;
-            display: inline-block;
-            user-select: none;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .calendar-checkbox input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .calendar-checkbox .checkmark {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 1.5rem;
-            width: 1.5rem;
-            background-color: #eee;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            transition: all 0.3s ease;
-        }
-
-        .calendar-checkbox:hover .checkmark {
-            background-color: #ddd;
-        }
-
-        .calendar-checkbox input:checked ~ .checkmark {
-            background-color: #0077cc;
-            border-color: #0077cc;
-        }
-
-        .calendar-checkbox .checkmark::after {
-            content: "";
-            position: absolute;
-            display: none;
-        }
-
-        .calendar-checkbox input:checked ~ .checkmark::after {
-            display: block;
-        }
-
-        .calendar-checkbox .checkmark::after {
-            top: 5px;
-            left: 5px;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: white;
-        }
-
-        /* Cores personalizadas para cada Ponto - checkmark */
-        .calendar-checkbox[data-point="1"] input:checked ~ .checkmark {
-            background-color: #2952A3; /* Azul */
-            border-color: #2952A3;
-        }
-        .calendar-checkbox[data-point="2"] input:checked ~ .checkmark {
-            background-color: #0D7813; /* Verde */
-            border-color: #0D7813;
-        }
-        .calendar-checkbox[data-point="3"] input:checked ~ .checkmark {
-            background-color: #E67C73; /* Laranja */
-            border-color: #E67C73;
-        }
-        .calendar-checkbox[data-point="4"] input:checked ~ .checkmark {
-            background-color: #B1365F; /* Vermelho */
-            border-color: #B1365F;
-        }
-        .calendar-checkbox[data-point="5"] input:checked ~ .checkmark {
-            background-color: #893B90; /* Roxo */
-            border-color: #893B90;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TPL Marari - Consulta de Carrinhos e Display</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header class="header">
-        <img src="logo.svg" alt="Logo TPL" class="logo-img" />
-        <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
-        <button id="darkModeToggle">
-            <span class="icon">🌙</span>
-            <span class="label">Modo escuro</span>
-        </button>
+  <div class="container">
+    <header>
+      <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
+      <button id="theme-toggle">
+        <span id="theme-icon">🌙</span>
+        <span id="theme-text">Modo escuro</span>
+      </button>
     </header>
 
-    <div class="main-container">
-        <div class="calendar-checkboxes">
-            <label class="calendar-checkbox" data-point="1">
-                <input type="radio" name="calendar" value="1" onclick="selectCalendar(1)">
-                <span class="checkmark"></span>
-                <strong>Ponto 1</strong> - Padaria Jd das Oliveiras
-            </label>
-            <label class="calendar-checkbox" data-point="2">
-                <input type="radio" name="calendar" value="2" onclick="selectCalendar(2)">
-                <span class="checkmark"></span>
-                <strong>Ponto 2</strong> - Mercado P&B | Ponto 5131
-            </label>
-            <label class="calendar-checkbox" data-point="3">
-                <input type="radio" name="calendar" value="3" onclick="selectCalendar(3)">
-                <span class="checkmark"></span>
-                <strong>Ponto 3</strong> - Praça Casa Palma
-            </label>
-            <label class="calendar-checkbox" data-point="4">
-                <input type="radio" name="calendar" value="4" onclick="selectCalendar(4)">
-                <span class="checkmark"></span>
-                <strong>Ponto 4</strong> - Padaria Primicia
-            </label>
-            <label class="calendar-checkbox" data-point="5">
-                <input type="radio" name="calendar" value="5" onclick="selectCalendar(5)">
-                <span class="checkmark"></span>
-                <strong>Ponto 5</strong> - Viaduto Washington Luiz
-            </label>
-        </div>
+    <section class="ponto-selector">
+      <label><input type="radio" name="ponto" value="1" />Ponto 1 - Mercado P&B</label>
+      <label><input type="radio" name="ponto" value="2" />Ponto 2 - Ponto 5131</label>
+      <label><input type="radio" name="ponto" value="3" />Ponto 3 - Jardim Miriam</label>
+      <label><input type="radio" name="ponto" value="4" />Ponto 4 - Santa Francisca</label>
+      <label><input type="radio" name="ponto" value="5" />Ponto 5 - Santo Afonso</label>
+      <label><input type="radio" name="ponto" value="6" />Ponto 6 - Av Cupece</label>
+    </section>
 
-        <div class="calendar-container">
-            <iframe id="calendarIframe" src="" frameborder="0" scrolling="no"></iframe>
-        </div>
-    </div>
+    <iframe id="calendar" src="" frameborder="0"></iframe>
+  </div>
 
-    <script>
-        const calendarSrcMap = {
-            1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
-            2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
-            3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
-            4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
-            5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com"
-        };
+  <script>
+    const calendarMap = {
+      1: "https://calendar.google.com/calendar/u/0?cid=dHBsLm1hcmFyaUBnbWFpbC5jb20",
+      2: "https://calendar.google.com/calendar/u/0?cid=Y185OTYzZWYzNzFlYjQ2MDU3YjQ1Yjc1MjVmMzBiZTY0NzhjZjU5OGNmNTk1YjliOTgxNzcxNjE5NzU3NDlmYTRjQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20",
+      3: "https://calendar.google.com/calendar/u/0?cid=Y19jNTI4ZjExZWE4YTU0OTMwYWI5OGM4ZTVkNThlN2ZjNTQ2Yzc1YmQ1YmE3Y2Y5ZTJmM2U2NjAzMmEwMmMzZDM1QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20",
+      4: "https://calendar.google.com/calendar/u/0?cid=Y18yZjA2ODkxNjcyZWFiZjk3NTY2N2I4YjEzMzVkNWE3ZmYxMmNiM2QwYjM3ZDg4ZjVjM2NhYmYxNTM2YThhZGUzY0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      5: "https://calendar.google.com/calendar/u/0?cid=Y18zZGRmZTczZmVkNTcyNThhZmZjNzRmZDZjZGUxNzEzYmQ4N2MyZDY5N2FiMjg2MjEyZjAzN2U1ZmUwOGY2MjNkZEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      6: "https://calendar.google.com/calendar/u/0?cid=OWRlMmM4MTg3YWI3YTQ3ZGRiYzBmZjljYTJmNzY1ZTA0ZjljNzI0NmE5ZDlmMDU5NDk4NTQ2MDFhZTVmNjg2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+    };
 
-        const calendarColorMap = {
-            1: "#2952A3", // Azul
-            2: "#0D7813", // Verde
-            3: "#E67C73", // Laranja
-            4: "#B1365F", // Vermelho
-            5: "#893B90"  // Roxo
-        };
+    const radioButtons = document.querySelectorAll('input[name="ponto"]');
+    const calendarFrame = document.getElementById('calendar');
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const themeText = document.getElementById('theme-text');
+    const rootElement = document.documentElement;
 
-        const selectedCalendar = localStorage.getItem("selectedCalendar") || null;
+    // Load saved settings
+    const savedPonto = localStorage.getItem('selectedPonto');
+    const savedTheme = localStorage.getItem('theme');
 
-        function updateIframe(srcId) {
-            const iframe = document.getElementById("calendarIframe");
-            let src = "https://calendar.google.com/calendar/embed?";
-            src += "ctz=America%2FSao_Paulo";
-            src += "&mode=AGENDA";
+    if (savedPonto) {
+      document.querySelector(`input[name="ponto"][value="${savedPonto}"]`).checked = true;
+      calendarFrame.src = calendarMap[savedPonto];
+    }
 
-            if (srcId && calendarSrcMap[srcId]) {
-                src += "&src=" + calendarSrcMap[srcId];
-                src += "&color=" + encodeURIComponent(calendarColorMap[srcId]);
-                localStorage.setItem("selectedCalendar", srcId);
-            }
+    if (savedTheme) {
+      rootElement.setAttribute("data-theme", savedTheme);
+      themeIcon.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+      themeText.textContent = savedTheme === "dark" ? "Modo claro" : "Modo escuro";
+    }
 
-            iframe.src = src;
-        }
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const selected = radio.value;
+        calendarFrame.src = calendarMap[selected];
+        localStorage.setItem('selectedPonto', selected);
+      });
+    });
 
-        function selectCalendar(id) {
-            updateIframe(id);
-        }
-
-        window.addEventListener("load", () => {
-            if (selectedCalendar) {
-                const input = document.querySelector(`input[value="${selectedCalendar}"]`);
-                if (input) input.checked = true;
-                updateIframe(selectedCalendar);
-            }
-        });
-
-        // Dark mode toggle
-        const toggleButton = document.getElementById("darkModeToggle");
-        const darkMode = localStorage.getItem("darkMode") === "true";
-
-        function applyDarkMode(active) {
-            document.body.classList.toggle("dark-mode", active);
-            toggleButton.querySelector(".icon").textContent = active ? "☀️" : "🌙";
-            toggleButton.querySelector(".label").textContent = active ? "Modo claro" : "Modo escuro";
-        }
-
-        toggleButton.addEventListener("click", () => {
-            const enabled = document.body.classList.toggle("dark-mode");
-            localStorage.setItem("darkMode", enabled);
-            applyDarkMode(enabled);
-        });
-
-        applyDarkMode(darkMode);
-    </script>
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = rootElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+      rootElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+      themeIcon.textContent = newTheme === "dark" ? "☀️" : "🌙";
+      themeText.textContent = newTheme === "dark" ? "Modo claro" : "Modo escuro";
+    });
+  </script>
 </body>
 </html>
