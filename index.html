@@ -86,12 +86,52 @@
             border-color: #893B90;
         }
         .calendar-checkbox[data-point="6"] input:checked ~ .checkmark {
-            background-color: #FF9900; /* Amarelo/laranja para o novo ponto */
-            border-color: #FF9900;
+            background-color: #FF8C00; /* Laranja escuro para o ponto 6 */
+            border-color: #FF8C00;
+        }
+
+        /* Tarja BETA fixa no topo - amarelo com ícones */
+        .beta-banner {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          background-color: #FFD700; /* Amarelo ouro */
+          color: #333;
+          text-align: center;
+          font-weight: bold;
+          padding: 0.4rem 0;
+          font-size: 1rem;
+          z-index: 9999;
+          font-family: Arial, sans-serif;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        /* Ícones estilo "⚠️" e "🧪" para indicar BETA */
+        .beta-banner .icon-warning {
+          font-size: 1.2rem;
+        }
+        .beta-banner .icon-lab {
+          font-size: 1.2rem;
+        }
+
+        /* Ajuste para empurrar o conteúdo para baixo, evitando sobreposição da tarja */
+        body {
+          padding-top: 2.2rem;
         }
     </style>
 </head>
 <body>
+    <div class="beta-banner" role="banner" aria-label="Versão Beta">
+      <span class="icon-warning" aria-hidden="true">⚠️</span>
+      VERSÃO BETA - Ambiente de testes
+      <span class="icon-lab" aria-hidden="true">🧪</span>
+    </div>
+
     <header class="header">
         <img src="logo.svg" alt="Logo TPL" class="logo-img" />
         <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
@@ -147,7 +187,7 @@
             3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
             4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
             5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
-            6: "9de2c8187ab7a47ddbc0ff9ca2f765e04f9c7246a9d9f05949854601ae5f6863%40group.calendar.google.com"
+            6: "OWRlMmM4MTg3YWI3YTQ3ZGRiYzBmZjljYTJmNzY1ZTA0ZjljNzI0NmE5ZDlmMDU5NDk4NTQ2MDFhZTVmNjg2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
         };
 
         const calendarColorMap = {
@@ -156,7 +196,7 @@
             3: "#E67C73", // Laranja
             4: "#B1365F", // Vermelho
             5: "#893B90", // Roxo
-            6: "#FF9900"  // Amarelo/laranja
+            6: "#FF8C00"  // Laranja escuro para o ponto 6
         };
 
         const selectedCalendar = localStorage.getItem("selectedCalendar") || null;
