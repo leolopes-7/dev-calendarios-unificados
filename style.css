@@ -1,124 +1,194 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Reset básico */
+body, h1, label, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-body, html {
-  font-family: sans-serif;
-  height: 100%;
-  background-color: var(--bg);
-  color: var(--text);
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-:root {
-  --bg: #ffffff;
-  --text: #000000;
-  --primary: #0050b3;
-  --radio1: #007bff;
-  --radio2: #28a745;
-  --radio3: #ffc107;
-  --radio4: #e83e8c;
-  --radio5: #6f42c1;
-  --radio6: #20c997;
+.dark-mode {
+    background-color: #1f1f1f;
+    color: #f5f5f5;
 }
 
-[data-theme="dark"] {
-  --bg: #121212;
-  --text: #f0f0f0;
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0077cc;
+    color: white;
+    padding: 1rem 2rem;
+    flex-wrap: wrap;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
+.header h1 {
+    font-size: 1.5rem;
+    margin-left: 1rem;
 }
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 1rem;
+.logo-img {
+    height: 40px;
 }
 
-h1 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+#darkModeToggle {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
-#theme-toggle {
-  background: none;
-  border: 1px solid var(--text);
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  transition: background 0.3s, color 0.3s;
+#darkModeToggle .icon {
+    margin-right: 0.5rem;
 }
 
-#theme-toggle:hover {
-  background-color: var(--text);
-  color: var(--bg);
+/* Main layout */
+.main-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.ponto-selector {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 20px;
+.calendar-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.ponto-selector label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  border-radius: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: transform 0.2s;
+/* Custom radio buttons */
+.calendar-checkbox {
+    position: relative;
+    padding-left: 2.5rem;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
-.ponto-selector label:hover {
-  transform: scale(1.02);
+.calendar-checkbox input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
 }
 
-.ponto-selector input[type="radio"] {
-  accent-color: currentColor;
+.calendar-checkbox .checkmark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease;
 }
 
-.ponto-selector input[value="1"]:checked + label,
-.ponto-selector label input[value="1"] {
-  color: var(--radio1);
-}
-.ponto-selector input[value="2"]:checked + label,
-.ponto-selector label input[value="2"] {
-  color: var(--radio2);
-}
-.ponto-selector input[value="3"]:checked + label,
-.ponto-selector label input[value="3"] {
-  color: var(--radio3);
-}
-.ponto-selector input[value="4"]:checked + label,
-.ponto-selector label input[value="4"] {
-  color: var(--radio4);
-}
-.ponto-selector input[value="5"]:checked + label,
-.ponto-selector label input[value="5"] {
-  color: var(--radio5);
-}
-.ponto-selector input[value="6"]:checked + label,
-.ponto-selector label input[value="6"] {
-  color: var(--radio6);
+.calendar-checkbox:hover .checkmark {
+    background-color: #ddd;
 }
 
-iframe {
-  width: 100%;
-  height: 80vh;
-  border: none;
+.calendar-checkbox input:checked ~ .checkmark {
+    background-color: #0077cc;
+    border-color: #0077cc;
+}
+
+.calendar-checkbox .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.calendar-checkbox input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.calendar-checkbox .checkmark::after {
+    top: 5px;
+    left: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+/* Cores para os nomes dos pontos */
+.ponto1 .calendar-title {
+    color: #2952A3; /* Azul */
+}
+.ponto2 .calendar-title {
+    color: #0D7813; /* Verde */
+}
+.ponto3 .calendar-title {
+    color: #E67C73; /* Laranja */
+}
+.ponto4 .calendar-title {
+    color: #B1365F; /* Vermelho */
+}
+.ponto5 .calendar-title {
+    color: #893B90; /* Roxo */
+}
+
+/* Dark mode adjustments */
+.dark-mode .header {
+    background-color: #111;
+    color: #f5f5f5;
+}
+
+.dark-mode #darkModeToggle {
+    color: #f5f5f5;
+}
+
+.dark-mode .calendar-checkbox .checkmark {
+    background-color: #444;
+    border-color: #666;
+}
+
+.dark-mode .calendar-checkbox input:checked ~ .checkmark {
+    background-color: #ffa500;
+    border-color: #ffa500;
+}
+
+.dark-mode .calendar-checkbox .checkmark::after {
+    background: #1f1f1f;
+}
+
+/* Manter a cor dos pontos no dark mode */
+.dark-mode .ponto1 .calendar-title {
+    color: #2952A3;
+}
+.dark-mode .ponto2 .calendar-title {
+    color: #0D7813;
+}
+.dark-mode .ponto3 .calendar-title {
+    color: #E67C73;
+}
+.dark-mode .ponto4 .calendar-title {
+    color: #B1365F;
+}
+.dark-mode .ponto5 .calendar-title {
+    color: #893B90;
+}
+
+/* Calendar iframe */
+.calendar-container iframe {
+    width: 100%;
+    height: 600px;
+    border: none;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.dark-mode .calendar-container iframe {
+    background-color: #2c2c2c;
 }
