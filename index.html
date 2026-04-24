@@ -6,29 +6,13 @@
     <title>TPL Marari - Consulta de Carrinhos e Display</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="style.css" />
-
-    <style>
-        .calendar-checkbox[data-point="7"] input:checked ~ .checkmark {
-            background-color: #008B8B;
-            border-color: #008B8B;
-        }
-
-        body {
-            padding-top: 2.2rem;
-        }
-    </style>
 </head>
 
 <body>
 
-<div class="beta-banner">
-  ⚠️ VERSÃO BETA - Ambiente de testes 🧪
-</div>
-
 <header class="header">
     <img src="logo.svg" alt="Logo TPL" class="logo-img" />
     <h1>TPL Marari - Consulta de Carrinhos e Display</h1>
-
     <button id="darkModeToggle">
         <span class="icon">🌙</span>
         <span class="label">Modo escuro</span>
@@ -91,13 +75,13 @@
 
 <script>
 const calendarSrcMap = {
-    1: "af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
-    2: "e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
-    3: "d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
-    4: "e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
-    5: "1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
-    6: "OWRlMmM4MTg3YWI3YTQ3ZGRiYzBmZjljYTJmNzY1ZTA0ZjljNzI0NmE5ZDlmMDU5NDk4NTQ2MDFhZTVmNjg2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
-    7: "NmViNmQ3OTQ0OTM0ZmY1ZmNhZDU1OWQxOTQwZGNmYTExNzdlNmMyOTg0MDg0ZjJkY2VkNjMzMGUyMTY1NmI4YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
+    1:"af1c95f4ae2831bba53c1cc769e785aefeb836b86a6af22aee8b1d2b73e6e190%40group.calendar.google.com",
+    2:"e34e0be9c80ce654dc03c852e6e3c52af2f53d129295e297861523cbbeff93c2%40group.calendar.google.com",
+    3:"d6c38e409070037546660123a107f4b95f65681a96c216cac7903d58465f5530%40group.calendar.google.com",
+    4:"e22e471e522d36c6e1bca2edfcecfbc5ea23c9af8b5b4d10004bf2c7e4b2261f%40group.calendar.google.com",
+    5:"1aa2749c04ae9ac703fa3b2ebbee2db79105711fcda01f98b82da998bc7488ce%40group.calendar.google.com",
+    6:"OWRlMmM4MTg3YWI3YTQ3ZGRiYzBmZjljYTJmNzY1ZTA0ZjljNzI0NmE5ZDlmMDU5NDk4NTQ2MDFhZTVmNjg2M0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+    7:"NmViNmQ3OTQ0OTM0ZmY1ZmNhZDU1OWQxOTQwZGNmYTExNzdlNmMyOTg0MDg0ZjJkY2VkNjMzMGUyMTY1NmI4YUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t"
 };
 
 const calendarColorMap = {
@@ -113,32 +97,36 @@ const calendarColorMap = {
 function updateIframe(id){
     const iframe = document.getElementById("calendarIframe");
     iframe.src = `https://calendar.google.com/calendar/embed?mode=AGENDA&ctz=America/Sao_Paulo&src=${calendarSrcMap[id]}&color=${encodeURIComponent(calendarColorMap[id])}`;
-    localStorage.setItem("calendar", id);
+    localStorage.setItem("selectedCalendar", id);
 }
 
 function selectCalendar(id){
     updateIframe(id);
 }
 
-window.onload = ()=>{
-    const saved = localStorage.getItem("calendar");
-    if(saved){
-        document.querySelector(`input[value="${saved}"]`).checked = true;
-        updateIframe(saved);
-    }
-};
+window.addEventListener("load", () => {
+    const saved = localStorage.getItem("selectedCalendar") || 1;
+    document.querySelector(`input[value="${saved}"]`).checked = true;
+    updateIframe(saved);
+});
 
 // Dark mode
-const btn = document.getElementById("darkModeToggle");
+const toggleButton = document.getElementById("darkModeToggle");
+const darkMode = localStorage.getItem("darkMode") === "true";
 
-btn.onclick = ()=>{
-    const active = document.body.classList.toggle("dark-mode");
-    localStorage.setItem("darkMode", active);
-};
-
-if(localStorage.getItem("darkMode")==="true"){
-    document.body.classList.add("dark-mode");
+function applyDarkMode(active) {
+    document.body.classList.toggle("dark-mode", active);
+    toggleButton.querySelector(".icon").textContent = active ? "☀️" : "🌙";
+    toggleButton.querySelector(".label").textContent = active ? "Modo claro" : "Modo escuro";
 }
+
+toggleButton.addEventListener("click", () => {
+    const enabled = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("darkMode", enabled);
+    applyDarkMode(enabled);
+});
+
+applyDarkMode(darkMode);
 </script>
 
 </body>

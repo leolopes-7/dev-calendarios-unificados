@@ -17,6 +17,7 @@ body {
     color: #f5f5f5;
 }
 
+/* Header */
 .header {
     display: flex;
     align-items: center;
@@ -44,14 +45,13 @@ body {
     display: flex;
     align-items: center;
     font-size: 1rem;
-    transition: color 0.3s ease;
 }
 
 #darkModeToggle .icon {
     margin-right: 0.5rem;
 }
 
-/* Main layout */
+/* Layout */
 .main-container {
     padding: 2rem;
     max-width: 900px;
@@ -65,45 +65,44 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Custom radio buttons */
+/* Radio custom */
 .calendar-checkbox {
     position: relative;
     padding-left: 2.5rem;
     cursor: pointer;
-    display: inline-block;
-    user-select: none;
-    font-size: 1rem;
-    line-height: 1.5;
+    transition: transform 0.15s ease;
 }
 
-.calendar-checkbox input[type="radio"] {
+.calendar-checkbox:hover {
+    transform: translateX(3px);
+}
+
+.calendar-checkbox input {
     position: absolute;
     opacity: 0;
-    cursor: pointer;
 }
 
-.calendar-checkbox .checkmark {
+.checkmark {
     position: absolute;
     left: 0;
     top: 0;
     height: 1.5rem;
     width: 1.5rem;
-    background-color: #eee;
+    background: #eee;
     border-radius: 50%;
     border: 2px solid #ccc;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .calendar-checkbox:hover .checkmark {
-    background-color: #ddd;
+    background: #ddd;
 }
 
 .calendar-checkbox input:checked ~ .checkmark {
-    background-color: #0077cc;
-    border-color: #0077cc;
+    border-width: 2px;
 }
 
-.calendar-checkbox .checkmark::after {
+.checkmark::after {
     content: "";
     position: absolute;
     display: none;
@@ -113,7 +112,7 @@ body {
     display: block;
 }
 
-.calendar-checkbox .checkmark::after {
+.checkmark::after {
     top: 5px;
     left: 5px;
     width: 6px;
@@ -122,111 +121,43 @@ body {
     background: white;
 }
 
-/* Cores para os nomes dos pontos */
-.ponto1 .calendar-title {
-    color: #2952A3; /* Azul */
-}
-.ponto2 .calendar-title {
-    color: #0D7813; /* Verde */
-}
-.ponto3 .calendar-title {
-    color: #E67C73; /* Laranja */
-}
-.ponto4 .calendar-title {
-    color: #B1365F; /* Vermelho */
-}
-.ponto5 .calendar-title {
-    color: #893B90; /* Roxo */
-}
-.ponto6 .calendar-title {
-    color: #FF8C00; /* Laranja escuro */
-}
-.ponto7 .calendar-title {
-    color: #008B8B; /* Azul petróleo */
-}
+/* ===== CORES POR PONTO ===== */
+.calendar-checkbox[data-point="1"] input:checked ~ .checkmark { background:#2952A3; border-color:#2952A3; }
+.calendar-checkbox[data-point="2"] input:checked ~ .checkmark { background:#0D7813; border-color:#0D7813; }
+.calendar-checkbox[data-point="3"] input:checked ~ .checkmark { background:#E67C73; border-color:#E67C73; }
+.calendar-checkbox[data-point="4"] input:checked ~ .checkmark { background:#B1365F; border-color:#B1365F; }
+.calendar-checkbox[data-point="5"] input:checked ~ .checkmark { background:#893B90; border-color:#893B90; }
+.calendar-checkbox[data-point="6"] input:checked ~ .checkmark { background:#FF8C00; border-color:#FF8C00; }
+.calendar-checkbox[data-point="7"] input:checked ~ .checkmark { background:#008B8B; border-color:#008B8B; }
 
-/* Dark mode adjustments */
+/* ===== DARK MODE ===== */
 .dark-mode .header {
     background-color: #111;
-    color: #f5f5f5;
 }
 
-.dark-mode #darkModeToggle {
-    color: #f5f5f5;
-}
-
-.dark-mode .calendar-checkbox .checkmark {
-    background-color: #444;
+.dark-mode .checkmark {
+    background: #444;
     border-color: #666;
 }
 
-.dark-mode .calendar-checkbox input:checked ~ .checkmark {
-    background-color: #ffa500;
-    border-color: #ffa500;
-}
+/* ===== GLOW POR PONTO (SEM AFETAR TEXTO) ===== */
+.dark-mode .calendar-checkbox[data-point="1"] input:checked ~ .checkmark { box-shadow: 0 0 8px #2952A3; }
+.dark-mode .calendar-checkbox[data-point="2"] input:checked ~ .checkmark { box-shadow: 0 0 8px #0D7813; }
+.dark-mode .calendar-checkbox[data-point="3"] input:checked ~ .checkmark { box-shadow: 0 0 8px #E67C73; }
+.dark-mode .calendar-checkbox[data-point="4"] input:checked ~ .checkmark { box-shadow: 0 0 8px #B1365F; }
+.dark-mode .calendar-checkbox[data-point="5"] input:checked ~ .checkmark { box-shadow: 0 0 8px #893B90; }
+.dark-mode .calendar-checkbox[data-point="6"] input:checked ~ .checkmark { box-shadow: 0 0 8px #FF8C00; }
+.dark-mode .calendar-checkbox[data-point="7"] input:checked ~ .checkmark { box-shadow: 0 0 8px #008B8B; }
 
-.dark-mode .calendar-checkbox .checkmark::after {
-    background: #1f1f1f;
-}
-
-/* Manter a cor dos pontos no dark mode */
-.dark-mode .ponto1 .calendar-title {
-    color: #2952A3;
-}
-.dark-mode .ponto2 .calendar-title {
-    color: #0D7813;
-}
-.dark-mode .ponto3 .calendar-title {
-    color: #E67C73;
-}
-.dark-mode .ponto4 .calendar-title {
-    color: #B1365F;
-}
-.dark-mode .ponto5 .calendar-title {
-    color: #893B90;
-}
-.dark-mode .ponto6 .calendar-title {
-    color: #FF8C00;
-}
-.dark-mode .ponto7 .calendar-title {
-    color: #008B8B;
-}
-
-/* Calendar iframe */
+/* Calendar */
 .calendar-container iframe {
     width: 100%;
     height: 600px;
     border: none;
-    background-color: white;
-    transition: background-color 0.3s ease;
+    background: white;
+    border-radius: 8px;
 }
 
 .dark-mode .calendar-container iframe {
-    background-color: #2c2c2c;
-}
-
-/* Tarja BETA */
-.beta-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #FFD700;
-  color: #333;
-  text-align: center;
-  font-weight: bold;
-  padding: 0.4rem 0;
-  font-size: 1rem;
-  z-index: 9999;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.beta-banner .icon-warning,
-.beta-banner .icon-lab {
-  font-size: 1.2rem;
+    background: #2c2c2c;
 }
